@@ -1,14 +1,18 @@
 class FlatsController < ApplicationController
-  def edit 
+  def edit
     @flat = Flat.find(params[:id])
   end
 
-  def update 
+  def update
     @flat = Flat.find(params[:id])
-    if @flat.save 
+    if @flat.save
       redirect_to @flat_path
-    else 
+    else
       render :edit
     end
+  end
+
+  def show
+    @flat = Flat.find(params[:id])
   end
 end
