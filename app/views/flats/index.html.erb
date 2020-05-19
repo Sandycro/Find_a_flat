@@ -1,10 +1,11 @@
-
-<h1>Find a Flat</h1>
-<ol>
-  <% @flats.each do |flat| %>
-    <li>
-<%= link_to flat.name, flat_path(user.id) %>
-<%= link_to flat.address, flat_path(user.id) %>
-</li>
+<div class = 'container'>
+  <h1>Find a Flat</h1>
+  <% @flats.each do |f| %>
+    <div class="card-product">
+      <div class="card-product-infos">
+        <h2><%=link_to f.name,flat_path(f)%></h2>
+        <p><%= f.address %></p>
+      </div>
+    </div>
   <% end %>
-</ol>
+</div>
