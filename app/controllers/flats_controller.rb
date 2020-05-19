@@ -5,29 +5,29 @@ class FlatsController < ApplicationController
 
   def create
     @flat = Flat.new(flat_params)
-    if @restaurant.save
+    @flat.user = current_user
+    if @flat.save
       redirect_to flat_path(@flat)
     else
       render :new
     end
   end
 
-  private
-
-  def flat_params
-    params.require(:flat).permit(:name, :address, :user)
-  end
-
   def edit 
     @flat = Flat.find(params[:id])
   end
 
-  def update 
+  def update
     @flat = Flat.find(params[:id])
-    if @flat.save 
+    if @flat.save
       redirect_to @flat_path
-    else 
+    else
       render :edit
     end
+  end
+
+private
+  def flat_params
+    params.require(:flat).permit(:name, :address)
   end
 end
