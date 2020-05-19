@@ -1,0 +1,10 @@
+
+<h1>Find a Flat</h1>
+<ol>
+  <% @flats.each do |flat| %>
+    <li>
+<%= link_to flat.name, flat_path(user.id) %>
+<%= link_to flat.address, flat_path(user.id) %>
+</li>
+  <% end %>
+</ol>
