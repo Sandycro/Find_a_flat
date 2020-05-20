@@ -2,10 +2,12 @@
   <h1>Find a Flat</h1>
   <% @flats.each do |f| %>
     <div class="card-product">
-      <div class="card-product-infos">
-        <h2><%=link_to f.name,flat_path(f)%></h2>
-        <p><%= f.address %></p>
+      <%= cl_image_tag f.photo.key, height: 300, width: 400, crop: :fill %>
+        <div class="card-product-infos">
+          <h2><%=link_to f.name,flat_path(f)%></h2>
+          <p><%= f.address %></p>
+        </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  <%= link_to "Back", root_path, class: "btn btn-primary"%>
 </div>
