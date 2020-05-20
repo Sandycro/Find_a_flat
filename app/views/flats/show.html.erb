@@ -1,3 +1,15 @@
 <h1><%= @flat.name %></h1>
 <h2><%= @flat.address %></h2>
+<%= link_to "Book the flat", new_flat_booking_path(@flat) %>
+
+<p>Flat bookings</p>
+<ul>
+  <%@bookings.each do |b|  %>
+    <li><%= b.start_date %>
+    <%= b.end_date %> 
+    <%= link_to "delete", booking_path(b), method: :delete, data: {confirm: "Are you sure?"} %></li>
+  <%end %>
+</ul>
+
+
 
