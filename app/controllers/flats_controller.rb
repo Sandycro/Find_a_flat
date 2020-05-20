@@ -32,11 +32,12 @@ class FlatsController < ApplicationController
 
   def show
     @flat = Flat.find(params[:id])
+    @bookings = Booking.where(flat: @flat)
   end
 
 private
 
   def flat_params
-    params.require(:flat).permit(:name, :address)
+    params.require(:flat).permit(:name, :address, :photo)
   end
 end
