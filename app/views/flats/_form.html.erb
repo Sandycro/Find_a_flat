@@ -2,8 +2,8 @@
   <%= simple_form_for [@flat] do |f| %>
     <%= f.input :name %>
     <%= f.input :address %>
-    <%= f.input :photo, as: :file %>
+    <%= f.input :photos, as: :file, input_html: { multiple: true } %>
     <%= f.submit "Submit", class: "btn btn-primary" %>
+    <%= link_to 'Back', flats_path, class: "btn btn-primary"%>
   <% end %>
 </div>
-

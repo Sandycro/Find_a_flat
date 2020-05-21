@@ -1,23 +1,23 @@
 class BookingsController < ApplicationController
   before_action :find_flat, only: [:create, :new]
-  def new 
-    @booking= Booking.new 
+  def new
+    @booking= Booking.new
   end
 
-  def create 
-    @booking = Booking.new(booking_params)  
+  def create
+    @booking = Booking.new(booking_params)
     @booking.flat = @flat
     @booking.user_id = current_user.id
-    if @booking.save 
+    if @booking.save
         redirect_to flat_path(@flat)
-    else 
+    else
       flash[:notice] = "Already booked"
     end
   end
 
-  def destroy 
+  def destroy
     @booking = Booking.find(params[:id])
-    @booking.destroy 
+    @booking.destroy
     redirect_to flat_path(@booking.flat)
   end
 
@@ -28,6 +28,6 @@ class BookingsController < ApplicationController
   end
 
   def find_flat
-    @flat = Flat.find(params[:flat_id]) 
-  end 
+    @flat = Flat.find(params[:flat_id])
+  end
 end

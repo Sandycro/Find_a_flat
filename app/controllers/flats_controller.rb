@@ -1,6 +1,13 @@
 class FlatsController < ApplicationController
   def index
-    @flats = Flat.all
+    if params[:query].present?
+    #   sql_query = "name ILIKE :query OR address ILIKE :query"
+    #   @flats = Flat.where(sql_query, query: "%#{params[:query]}%")
+    # else
+      @flats = Flat.search_by_name_and_address(params[:query])
+    else
+      @flats = Flat.all
+    end
   end
 
   def new
@@ -38,6 +45,6 @@ class FlatsController < ApplicationController
 private
 
   def flat_params
-    params.require(:flat).permit(:name, :address, :photo)
+    params.require(:flat).permit(:name, :address, photos: [])
   end
 end
