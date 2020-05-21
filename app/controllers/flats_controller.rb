@@ -35,9 +35,10 @@ class FlatsController < ApplicationController
     @bookings = Booking.where(flat: @flat)
   end
 
+
 private
 
   def flat_params
-    params.require(:flat).permit(:name, :address, :photo)
+    params.require(:flat).permit(:name, :address, :photo, :price, :description)
   end
 end
