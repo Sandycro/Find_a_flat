@@ -7,11 +7,17 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
     @booking.flat = @flat
-    @booking.user_id = current_user.id
-    if @booking.save
+    if @booking.end_date >= @booking.start_date
+      @booking.cost =  @flat.price * (@booking.end_date - @booking.start_date + 1).to_i
+      @booking.user_id = current_user.id
+      if @booking.save 
         redirect_to flat_path(@flat)
+      else 
+        flash[:notice] = "Already booked"
+      end
     else
-      flash[:notice] = "Already booked"
+      flash[:alert] = "Your end date should be after your start date!"
+      render :new
     end
   end
 
@@ -24,7 +30,7 @@ class BookingsController < ApplicationController
   private
 
   def booking_params
-    params.require(:booking).permit(:start_date, :end_date)
+    params.require(:booking).permit(:start_date, :end_date, :cost)
   end
 
   def find_flat

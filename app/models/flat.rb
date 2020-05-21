@@ -3,6 +3,7 @@ class Flat < ApplicationRecord
   has_many :bookings, dependent: :destroy
   validates :name, presence: true
   validates :address, presence: true
+
   has_many_attached :photos
   validates :photos, presence: true
   include PgSearch::Model
@@ -11,4 +12,6 @@ class Flat < ApplicationRecord
     using: {
       tsearch: { prefix: true }
     }
+  geocoded_by :address
+  after_validation :geocode, if: :will_save_change_to_address?
 end

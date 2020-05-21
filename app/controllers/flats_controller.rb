@@ -1,12 +1,17 @@
 class FlatsController < ApplicationController
+   skip_before_action :authenticate_user!, only: :index
   def index
     if params[:query].present?
-    #   sql_query = "name ILIKE :query OR address ILIKE :query"
-    #   @flats = Flat.where(sql_query, query: "%#{params[:query]}%")
-    # else
       @flats = Flat.search_by_name_and_address(params[:query])
     else
       @flats = Flat.all
+    end
+    @flats = Flat.geocoded
+    @markers = @flats.map do |flat|
+      {
+        lat: flat.latitude,
+        lng: flat.longitude
+      }
     end
   end
 
@@ -40,11 +45,15 @@ class FlatsController < ApplicationController
   def show
     @flat = Flat.find(params[:id])
     @bookings = Booking.where(flat: @flat)
+    @markers=[{
+        lat: @flat.latitude,
+        lng: @flat.longitude
+      }]
   end
 
 private
 
   def flat_params
-    params.require(:flat).permit(:name, :address, photos: [])
+    params.require(:flat).permit(:name, :address, :price, :description, photos: [])
   end
 end
