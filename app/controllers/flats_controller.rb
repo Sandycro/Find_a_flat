@@ -1,6 +1,14 @@
 class FlatsController < ApplicationController
+   skip_before_action :authenticate_user!, only: :index
   def index
-    @flats = Flat.all
+    @flats = Flat.geocoded
+
+    @markers = @flats.map do |flat|
+      {
+        lat: flat.latitude,
+        lng: flat.longitude
+      }
+    end
   end
 
   def new
@@ -33,6 +41,10 @@ class FlatsController < ApplicationController
   def show
     @flat = Flat.find(params[:id])
     @bookings = Booking.where(flat: @flat)
+    @markers=[{
+        lat: @flat.latitude,
+        lng: @flat.longitude
+      }]
   end
 
 
