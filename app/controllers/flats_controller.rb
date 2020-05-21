@@ -1,8 +1,12 @@
 class FlatsController < ApplicationController
    skip_before_action :authenticate_user!, only: :index
   def index
+    if params[:query].present?
+      @flats = Flat.search_by_name_and_address(params[:query])
+    else
+      @flats = Flat.all
+    end
     @flats = Flat.geocoded
-
     @markers = @flats.map do |flat|
       {
         lat: flat.latitude,
@@ -47,10 +51,9 @@ class FlatsController < ApplicationController
       }]
   end
 
-
 private
 
   def flat_params
-    params.require(:flat).permit(:name, :address, :photo, :price, :description)
+    params.require(:flat).permit(:name, :address, :price, :description, photos: [])
   end
 end

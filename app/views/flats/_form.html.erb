@@ -4,8 +4,8 @@
     <%= f.input :address %>
     <%= f.input :price %>
     <%= f.input :description %>
-    <%= f.input :photo, as: :file %>
+    <%= f.input :photos, as: :file, input_html: { multiple: true } %>
     <%= f.submit "Submit", class: "btn btn-primary" %>
+    <%= link_to 'Back', flats_path, class: "btn btn-primary"%>
   <% end %>
 </div>
-

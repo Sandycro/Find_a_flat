@@ -1,11 +1,11 @@
 class BookingsController < ApplicationController
   before_action :find_flat, only: [:create, :new]
-  def new 
-    @booking= Booking.new 
+  def new
+    @booking= Booking.new
   end
 
-  def create 
-    @booking = Booking.new(booking_params)  
+  def create
+    @booking = Booking.new(booking_params)
     @booking.flat = @flat
     if @booking.end_date >= @booking.start_date
       @booking.cost =  @flat.price * (@booking.end_date - @booking.start_date + 1).to_i
@@ -21,9 +21,9 @@ class BookingsController < ApplicationController
     end
   end
 
-  def destroy 
+  def destroy
     @booking = Booking.find(params[:id])
-    @booking.destroy 
+    @booking.destroy
     redirect_to flat_path(@booking.flat)
   end
 
@@ -34,6 +34,6 @@ class BookingsController < ApplicationController
   end
 
   def find_flat
-    @flat = Flat.find(params[:flat_id]) 
-  end 
+    @flat = Flat.find(params[:flat_id])
+  end
 end
