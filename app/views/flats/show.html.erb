@@ -26,7 +26,7 @@
 
 <div class="container">
   <h2><%= @flat.address %></h2>
-  <h3><%= @flat.price %>£/night</h3>
+  <h3>£<%= @flat.price %>/night</h3>
   <p><%= @flat.description %></p>
   <% if current_user == @flat.user%>
     <%= link_to "Edit", edit_flat_path, class: "btn btn-primary" %>
