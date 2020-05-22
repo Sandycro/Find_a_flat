@@ -1,7 +1,6 @@
 <div class = "container">
-  <p>Bookings</p>
+  <h1>Bookings</h1>
   <% unless @bookings.empty? %>
-    <ul>
       <%@bookings.each do |b|  %>
         <div class="card-product" id="flats">
           <% if b.flat.photos.attached?%>
@@ -18,9 +17,6 @@
         </div>
         <%= link_to "Search flats", flats_path, class: "btn btn-primary"%>
       <%end %>
-    </ul>
   <% else %>
     <h2>Hello :) You don't have any bookings yet</h2>
-    <%= link_to "Search flats", flats_path, class: "btn btn-primary"%>
   <% end %>
-</div>
