@@ -1,0 +1,17 @@
+<div class = "container">
+  <p>Bookings</p>
+  <% unless @bookings.empty? %>
+    <ul>
+      <%@bookings.each do |b|  %>
+        <li><%= b.start_date %>
+        <%= b.end_date %>
+        <%= b.cost %> £
+        <%= link_to "delete", booking_path(b), method: :delete, data: {confirm: "Are you sure?"} %></li>
+        <%= link_to "Search flats", flats_path, class: "btn btn-primary"%>
+      <%end %>
+    </ul>
+  <% else %>
+    <h2>Hello :) You don't have any bookings yet</h2>
+    <%= link_to "Search flats", flats_path, class: "btn btn-primary"%>
+  <% end %>
+</div>
