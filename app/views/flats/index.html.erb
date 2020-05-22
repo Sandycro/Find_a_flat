@@ -1,6 +1,6 @@
 <div class = 'container'>
   <h1>Find a Flat</h1>
-  
+
   <%= form_tag flats_path, method: :get do %>
   <%= text_field_tag :query,
     params[:query],
@@ -11,7 +11,7 @@
 <% end %>
 
   <% @flats.each do |f| %>
-    <div data-aos="flip-left" class="card-product" id="flats">
+    <div class="card-product" id="flats">
       <% if f.photos.attached?%>
         <%= cl_image_tag f.photos.first.key, height: 300, width: 400, crop: :fill %>
       <% end %>
