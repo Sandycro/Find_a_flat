@@ -1,18 +1,22 @@
 <div class = "container">
   <h1>Bookings</h1>
   <% unless @bookings.empty? %>
-    <ul>
       <%@bookings.each do |b|  %>
-      <div class="card-bookings">
-       <li> Price £ <%= b.cost %> <br>
-        Start date <%= b.start_date %><br>
-        End date <%= b.end_date %> <br></li>
-        <li><%= link_to "delete", booking_path(b), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-primary" %></li>
-      </div>
+        <div class="card-product" id="flats">
+          <% if b.flat.photos.attached?%>
+            <%= cl_image_tag b.flat.photos.first.key, height: 300, width: 400, crop: :fill %>
+          <% end %>
+          <div class="card-product-infos">
+            <h2><%=link_to b.flat.name,flat_path(b.flat)%></h2>
+            <div><%= b.flat.address %></div>
+            <p class = 'm-0'>Booked from: <%= b.start_date.strftime('%A, %b %d') %> </p>
+            <p class = 'm-0'>To: <%= b.end_date.strftime('%A, %b %d') %> </p>
+            £<%= b.cost %>
+            <%= link_to "delete", booking_path(b), method: :delete, data: {confirm: "Are you sure?"} %>
+          </div>
+        </div>
+        <%= link_to "Search flats", flats_path, class: "btn btn-primary"%>
       <%end %>
-    </ul>
   <% else %>
     <h2>Hello :) You don't have any bookings yet</h2>
   <% end %>
-   <%= link_to "Search flats", flats_path, class: "btn btn-primary"%>
-</div>
