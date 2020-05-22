@@ -7,8 +7,8 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
     @booking.flat = @flat
-    if @booking.end_date >= @booking.start_date
-      @booking.cost =  @flat.price * (@booking.end_date - @booking.start_date + 1).to_i
+    if @booking.end_date > @booking.start_date
+      @booking.cost =  @flat.price * (@booking.end_date - @booking.start_date).to_i
       @booking.user_id = current_user.id
       if @booking.save 
         redirect_to flat_path(@flat)
@@ -16,7 +16,7 @@ class BookingsController < ApplicationController
         flash[:notice] = "Already booked"
       end
     else
-      flash[:alert] = "Your end date should be after your start date!"
+      flash[:alert] = "The end date of your booking should be after the start date!"
       render :new
     end
   end
