@@ -15,8 +15,8 @@
             <%= link_to "delete", booking_path(b), method: :delete, data: {confirm: "Are you sure?"} %>
           </div>
         </div>
-        <%= link_to "Search flats", flats_path, class: "btn btn-primary"%>
       <%end %>
+    <%= link_to "Search flats", flats_path, class: "btn btn-primary"%>
   <% else %>
     <h2>Hello :) You don't have any bookings yet</h2>
   <% end %>
