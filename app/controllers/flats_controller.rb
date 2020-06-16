@@ -6,8 +6,8 @@ class FlatsController < ApplicationController
     else
       @flats = Flat.all
     end
-    @flats = Flat.geocoded
-    @markers = @flats.map do |flat|
+    @flats_map = Flat.geocoded
+    @markers = @flats_map.map do |flat|
       {
         lat: flat.latitude,
         lng: flat.longitude
